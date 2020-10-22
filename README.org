@@ -1,0 +1,10 @@
+* Test app for montage.tv
+
+** Setting up a database
+
+This project uses [[http://knexjs.org][knex]] for managing DB migrations. In both development
+and productions environments DB connection will be sourced from the
+~DATABASE_URL~ env, which uses conventional connection string format
+(~postgresql://user:pass@localhost:5432/db~).
+
+You can migrate to the latest DB schema via ~knex migrate:latest~.
