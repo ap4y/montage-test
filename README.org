@@ -8,3 +8,9 @@ and productions environments DB connection will be sourced from the
 (~postgresql://user:pass@localhost:5432/db~).
 
 You can migrate to the latest DB schema via ~knex migrate:latest~.
+
+** Running docker container
+
+#+BEGIN_SRC sh
+$ docker run -p 3001:3001 -e DATABASE_URL=postgresql://user:user@localhost:5432/user montage
+#+END_SRC
