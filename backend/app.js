@@ -9,6 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/movies', moviesRouter);
+const environment = process.env.ENVIRONMENT || 'development';
+if (environment == 'development') app.use(require('cors')());
+
+app.use('/api/movies', moviesRouter);
 
 module.exports = app;

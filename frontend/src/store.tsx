@@ -9,14 +9,18 @@ interface MovieState {
   movies: Array<Movie>;
 }
 
-type ACTIONTYPE =
-  | { type: 'increment'; payload: number }
+export enum ActionType {
+  LoadMovies = 1,
+}
+
+type ActionInterface =
+  | { type: ActionType.LoadMovies; payload: Array<Movie> }
   | { type: 'decrement'; payload: string };
 
-export function moviesReducer(state: MovieState, action: ACTIONTYPE) {
+export function moviesReducer(state: MovieState, action: ActionInterface) {
   switch (action.type) {
-    case 'increment':
-      return { movies: state.movies };
+    case ActionType.LoadMovies:
+      return { movies: action.payload };
     case 'decrement':
       return { movies: state.movies };
     default:
@@ -26,7 +30,7 @@ export function moviesReducer(state: MovieState, action: ACTIONTYPE) {
 
 interface MoviesContextInterface {
   state: MovieState;
-  dispatch: React.Dispatch<ACTIONTYPE>;
+  dispatch: React.Dispatch<ActionInterface>;
 }
 const MoviesContext = React.createContext<MoviesContextInterface | null>(null);
 

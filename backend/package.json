@@ -11,6 +11,7 @@
     "pg": "^8.4.1"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "eslint": "^7.11.0",
     "eslint-config-standard": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",

@@ -1,0 +1,29 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+}
+
+button {
+  appearance: none;
+  padding: 0.5rem 2rem;
+  background: #a3be8c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+}
