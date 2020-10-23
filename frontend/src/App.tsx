@@ -3,9 +3,11 @@ import MoviesContext, { moviesReducer } from './store';
 import MoviesList from './components/MoviesList';
 import MovieDetails from './components/MovieDetails';
 
+const EMPTY_ID = -1;
+
 function getMovieId() {
   const hash = window.location.hash;
-  if (!hash.startsWith('#movie-')) return -1;
+  if (!hash.startsWith('#movie-')) return EMPTY_ID;
 
   return Number.parseInt(hash.replace('#movie-', ''));
 }
@@ -28,8 +30,8 @@ function App() {
   return (
     <MoviesContext.Provider value={{ state, dispatch }}>
       <div className="App">
-        {movieId === -1 && <MoviesList />}
-        {movieId !== -1 && <MovieDetails movieId={movieId} />}
+        {movieId === EMPTY_ID && <MoviesList />}
+        {movieId !== EMPTY_ID && <MovieDetails movieId={movieId} />}
       </div>
     </MoviesContext.Provider>
   );

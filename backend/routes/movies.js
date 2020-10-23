@@ -50,16 +50,7 @@ router.post('/', async (req, res) => {
       screenwriter,
       image,
     });
-    res.json({
-      id,
-      title,
-      description,
-      year,
-      director,
-      producer,
-      screenwriter,
-      image,
-    });
+    res.json({ id, ...movie });
   } catch (error) {
     res.status(400).json({ error });
   }

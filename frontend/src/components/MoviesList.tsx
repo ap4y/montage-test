@@ -12,7 +12,6 @@ interface MovieItemProps {
 }
 
 function MovieItem({ title, year, image }: MovieItemProps) {
-  console.log(image);
   return (
     <figure>
       <img src={`data:image/png;base64,${image}`} alt={`${title}(${year})`} />
