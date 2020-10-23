@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Movie } from '../store';
 
-import './CreateForm.css';
-
 interface CreateFormProps {
   onSave: (movie: Movie) => void;
   onCancel: () => void;

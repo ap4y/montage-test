@@ -1,0 +1,16 @@
+.MovieDetails {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.MovieDetails > div {
+  flex: 1;
+}
+
+.MovieDetails img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ddd;
+}
