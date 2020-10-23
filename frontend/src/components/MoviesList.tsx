@@ -5,6 +5,23 @@ import CreateForm from './CreateForm';
 
 import './MoviesList.css';
 
+interface MovieItemProps {
+  title: string;
+  year: number;
+}
+
+function MovieItem({ title, year }: MovieItemProps) {
+  return (
+    <figure>
+      <img alt={`${title}(${year})`} />
+      <figcaption>
+        <span>{title}</span>
+        <small>{year}</small>
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function MoviesList() {
   const [modalVisible, setModalVisible] = useState(false);
   const ctx = useContext(MoviesContext);
@@ -23,8 +40,12 @@ export default function MoviesList() {
       <p>No movies to display</p>
     ) : (
       <ul>
-        {ctx?.state.movies.map(({ id, title }) => (
-          <li key={id}>{title}</li>
+        {ctx?.state.movies.map(({ id, title, year }) => (
+          <li key={id}>
+            <a href={`#movie-${id}`}>
+              <MovieItem title={title} year={year} />
+            </a>
+          </li>
         ))}
       </ul>
     );

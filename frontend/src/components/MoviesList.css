@@ -37,3 +37,37 @@
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+
+.MoviesList ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.MoviesList li {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+.MoviesList li > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.MoviesList figure {
+  margin: 0;
+  border: 1px solid #ddd;
+}
+.MoviesList figure > img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  background: #ddd;
+}
+.MoviesList figure > figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem;
+  text-align: center;
+}
