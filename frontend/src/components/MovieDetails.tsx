@@ -34,9 +34,6 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
           <strong>Screenwriter:</strong> {movie?.screenwriter}
         </p>
         <p>
-          <strong>Director:</strong> {movie?.director}
-        </p>
-        <p>
           <strong>Description:</strong> <br /> {movie?.description}
         </p>
         <a
