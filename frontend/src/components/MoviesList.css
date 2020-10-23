@@ -3,3 +3,37 @@
   justify-content: space-between;
   align-items: baseline;
 }
+
+.MoviesList .modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 60%;
+}
+
+.MoviesList .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.MoviesList .modal > form {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 2rem;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}

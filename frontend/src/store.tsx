@@ -1,8 +1,13 @@
 import React from 'react';
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
+  year: number;
+  description: string;
+  director: string;
+  producer: string;
+  screenwriter: string;
 }
 
 interface MovieState {
@@ -11,18 +16,19 @@ interface MovieState {
 
 export enum ActionType {
   LoadMovies = 1,
+  AddMovie,
 }
 
 type ActionInterface =
   | { type: ActionType.LoadMovies; payload: Array<Movie> }
-  | { type: 'decrement'; payload: string };
+  | { type: ActionType.AddMovie; payload: Movie }
 
 export function moviesReducer(state: MovieState, action: ActionInterface) {
   switch (action.type) {
     case ActionType.LoadMovies:
       return { movies: action.payload };
-    case 'decrement':
-      return { movies: state.movies };
+    case ActionType.AddMovie:
+      return { movies: [...state.movies, action.payload] };
     default:
       throw new Error();
   }

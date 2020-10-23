@@ -15,25 +15,36 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { movie } = req.body;
-
   if (!movie) {
-    res.status(400).json({ error: 'invalid record' });
+    res.status(400).json({ error: 'invalid payload' });
     return;
   }
 
-  if (!movie.title) {
+  const { title, description, year, director, producer, screenwriter } = movie;
+
+  if (!title) {
     res.status(422).json({ error: 'missing movie title' });
     return;
   }
 
-  if (!movie.year) {
+  if (!year) {
     res.status(422).json({ error: 'missing movie year' });
     return;
   }
 
   try {
-    const [id] = await db('movies').returning('id').insert(movie);
-    res.json({ id, ...movie });
+    const [id] = await db('movies')
+      .returning('id')
+      .insert({ title, description, year, director, producer, screenwriter });
+    res.json({
+      id,
+      title,
+      description,
+      year,
+      director,
+      producer,
+      screenwriter,
+    });
   } catch (error) {
     res.status(400).json({ error });
   }

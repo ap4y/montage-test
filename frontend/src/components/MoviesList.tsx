@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from 'react';
-import MoviesContext, { ActionType } from '../store';
+import React, { useState, useContext, useEffect } from 'react';
+import MoviesContext, { ActionType, Movie } from '../store';
 import request from '../client';
-import CreateForm from "./CreateForm";
+import CreateForm from './CreateForm';
 
 import './MoviesList.css';
 
 export default function MoviesList() {
+  const [modalVisible, setModalVisible] = useState(false);
   const ctx = useContext(MoviesContext);
   const dispatch = ctx?.dispatch;
 
@@ -17,24 +18,43 @@ export default function MoviesList() {
     });
   }, [dispatch]);
 
-  const movieItems = <p>No movies to display</p> ?? (
-    <ul>
-      {ctx?.state?.movies.map(({ id, title }) => (
-        <li key={id}>{title}</li>
-      ))}
-    </ul>
-  );
+  const movieItems =
+    ctx?.state.movies.length === 0 ? (
+      <p>No movies to display</p>
+    ) : (
+      <ul>
+        {ctx?.state.movies.map(({ id, title }) => (
+          <li key={id}>{title}</li>
+        ))}
+      </ul>
+    );
 
-  const showCreateModal = () => {};
+  const saveMovie = (movie: Movie) => {
+    if (!dispatch) return;
+
+    request('movies', 'POST', { movie }).then((result) => {
+      dispatch({ type: ActionType.AddMovie, payload: result });
+      setModalVisible(false);
+    });
+  };
 
   return (
     <div className="MoviesList">
       <header>
         <h2>Movies</h2>
-        <button onClick={showCreateModal}>Add movie</button>
+        <button className="primary" onClick={() => setModalVisible(true)}>
+          Add movie
+        </button>
       </header>
       <section>{movieItems}</section>
-      <div><CreateForm /></div>
+      {modalVisible && (
+        <div className="modal">
+          <CreateForm
+            onSave={saveMovie}
+            onCancel={() => setModalVisible(false)}
+          />
+        </div>
+      )}
     </div>
   );
 }

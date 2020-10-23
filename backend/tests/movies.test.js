@@ -16,7 +16,7 @@ describe('GET /movies', () => {
   });
 
   it('responds with json', async () => {
-    const res = await request(app).get('/movies');
+    const res = await request(app).get('/api/movies');
 
     expect(res.status).toBe(200);
     expect(res.body.length).toBe(1);
@@ -29,7 +29,7 @@ describe('GET /movies', () => {
 
   describe('GET /movies/:id', () => {
     it('responds with json', async () => {
-      const res = await request(app).get(`/movies/${movieId}`);
+      const res = await request(app).get(`/api/movies/${movieId}`);
 
       expect(res.status).toBe(200);
       expect(res.body).toMatchObject({
@@ -57,7 +57,7 @@ describe('POST /movies', () => {
       producer: 'producer',
       screenwriter: 'screenwriter',
     };
-    const res = await request(app).post('/movies').send({ movie });
+    const res = await request(app).post('/api/movies').send({ movie });
 
     movieId = res.body.id;
     expect(res.status).toBe(200);
@@ -73,7 +73,7 @@ describe('POST /movies', () => {
 
   describe('missing movie param', () => {
     it('responds with 400', async () => {
-      const res = await request(app).post('/movies');
+      const res = await request(app).post('/api/movies');
 
       expect(res.status).toBe(400);
     });
@@ -82,7 +82,7 @@ describe('POST /movies', () => {
   describe('missing movie title', () => {
     it('responds with 422', async () => {
       const res = await request(app)
-        .post('/movies')
+        .post('/api/movies')
         .send({ movie: { year: 2016 } });
 
       expect(res.status).toBe(422);
@@ -92,7 +92,7 @@ describe('POST /movies', () => {
   describe('missing movie year', () => {
     it('responds with 422', async () => {
       const res = await request(app)
-        .post('/movies')
+        .post('/api/movies')
         .send({ movie: { title: 'test' } });
 
       expect(res.status).toBe(422);

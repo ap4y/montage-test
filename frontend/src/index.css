@@ -17,13 +17,45 @@ main {
   max-width: 800px;
 }
 
-button {
+button,
+input[type='submit'] {
   appearance: none;
   padding: 0.5rem 2rem;
-  background: #a3be8c;
+  margin-right: 1rem;
+  background: #ccc;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1em;
   font-weight: bold;
+  cursor: pointer;
+}
+
+button.primary,
+input[type='submit'].primary {
+  background: #a3be8c;
+}
+
+button:disabled,
+input[type='submit']:disabled {
+  background: #eee;
+}
+
+form label {
+  display: block;
+  width: 100%;
+}
+
+form > div {
+  margin-bottom: 1rem;
+}
+
+input[type='text'],
+input[type='number'],
+textarea {
+  width: 100%;
+  appearance: none;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
