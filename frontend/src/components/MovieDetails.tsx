@@ -50,7 +50,7 @@ export default function MovieDetails({ movieId }: MovieDetailsProps) {
         </a>
       </div>
       <div>
-        <img alt={movie?.title} />
+        <img src={`data:image/png;base64,${movie?.image}`} alt={movie?.title} />
       </div>
     </div>
   );

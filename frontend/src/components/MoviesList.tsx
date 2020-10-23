@@ -8,12 +8,14 @@ import './MoviesList.css';
 interface MovieItemProps {
   title: string;
   year: number;
+  image: string;
 }
 
-function MovieItem({ title, year }: MovieItemProps) {
+function MovieItem({ title, year, image }: MovieItemProps) {
+  console.log(image);
   return (
     <figure>
-      <img alt={`${title}(${year})`} />
+      <img src={`data:image/png;base64,${image}`} alt={`${title}(${year})`} />
       <figcaption>
         <span>{title}</span>
         <small>{year}</small>
@@ -40,13 +42,15 @@ export default function MoviesList() {
       <p>No movies to display</p>
     ) : (
       <ul>
-        {ctx?.state.movies.map(({ id, title, year }) => (
-          <li key={id}>
-            <a href={`#movie-${id}`}>
-              <MovieItem title={title} year={year} />
-            </a>
-          </li>
-        ))}
+        {ctx?.state.movies
+          .sort((a, b) => a.id - b.id)
+          .map(({ id, title, year, image }) => (
+            <li key={id}>
+              <a href={`#movie-${id}`}>
+                <MovieItem title={title} year={year} image={image} />
+              </a>
+            </li>
+          ))}
       </ul>
     );
 

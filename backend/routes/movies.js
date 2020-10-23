@@ -20,7 +20,15 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  const { title, description, year, director, producer, screenwriter } = movie;
+  const {
+    title,
+    description,
+    year,
+    director,
+    producer,
+    screenwriter,
+    image,
+  } = movie;
 
   if (!title) {
     res.status(422).json({ error: 'missing movie title' });
@@ -33,9 +41,15 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const [id] = await db('movies')
-      .returning('id')
-      .insert({ title, description, year, director, producer, screenwriter });
+    const [id] = await db('movies').returning('id').insert({
+      title,
+      description,
+      year,
+      director,
+      producer,
+      screenwriter,
+      image,
+    });
     res.json({
       id,
       title,
@@ -44,6 +58,7 @@ router.post('/', async (req, res) => {
       director,
       producer,
       screenwriter,
+      image,
     });
   } catch (error) {
     res.status(400).json({ error });

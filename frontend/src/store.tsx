@@ -8,6 +8,7 @@ export interface Movie {
   director: string;
   producer: string;
   screenwriter: string;
+  image: string;
 }
 
 interface MovieState {

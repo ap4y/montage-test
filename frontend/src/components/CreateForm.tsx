@@ -13,11 +13,21 @@ export default function CreateForm({ onSave, onCancel }: CreateFormProps) {
   const [director, setDirector] = useState('');
   const [producer, setProducer] = useState('');
   const [screenwriter, setScreenwriter] = useState('');
+  const [image, setImage] = useState('');
   const [saveDisabled, setSaveDisabled] = useState(true);
 
   useEffect(() => {
     setSaveDisabled(title.length === 0);
   }, [title]);
+
+  const getBase64Data = (file: File) => {
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = function () {
+      if (!reader.result) return;
+      setImage(btoa(reader.result as string));
+    };
+  };
 
   const saveMovie = () => {
     onSave({
@@ -28,18 +38,24 @@ export default function CreateForm({ onSave, onCancel }: CreateFormProps) {
       director,
       producer,
       screenwriter,
+      image,
     });
   };
 
   return (
     <form
-      className="CreateForm"
       onSubmit={(event) => {
         event.preventDefault();
         saveMovie();
       }}
     >
       <h3>Add a new movie</h3>
+
+      <img
+        style={{ width: '100%' }}
+        src={`data:image/png;base64,${image}`}
+        alt=""
+      />
 
       <div>
         <label>Title*</label>
@@ -102,6 +118,18 @@ export default function CreateForm({ onSave, onCancel }: CreateFormProps) {
           value={screenwriter}
           onChange={({ target }) => {
             setScreenwriter(target.value);
+          }}
+        />
+      </div>
+
+      <div>
+        <label>Poster</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={({ target }) => {
+            if (!target.files || target.files.length === 0) return;
+            getBase64Data(target.files[0]);
           }}
         />
       </div>

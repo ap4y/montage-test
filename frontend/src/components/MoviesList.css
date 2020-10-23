@@ -59,9 +59,9 @@
 }
 .MoviesList figure > img {
   display: block;
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
   background: #ddd;
 }
 .MoviesList figure > figcaption {
